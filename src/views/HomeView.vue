@@ -7,35 +7,22 @@
     </div>
 
     <div class="container">
-      <div class="card-note-list row" v-if="dataList && dataList.length > 0">
-        <div class="col-3 mb-3" v-for="(each, idx) in dataList" :key="idx">
-          <b-card
-            :header="each.tanggal"
-            header-tag="header">
-            <div class="list-content">
-              <div class="d-flex justify-content-between"
-              v-for="(item, j) in each.items" :key="j">
-                <div>
-                  <span class="me-3">{{ item.jam }}</span>
-                  <span>{{ item.nama }}</span>
-                </div>
-                <p>Rp {{ numberFormat(item.pengeluaraan)  }}</p>
-              </div>
-            </div>
-            <div class="card-footer">
-              <strong>Total Rp {{ numberFormat(each.totalExpense) }}</strong>
-            </div>
-        </b-card>
-        </div>
-      </div>
-
+      <card-notes 
+      v-if="dataList && dataList.length > 0"
+      v-bind:dataList="dataList" 
+      @totalSpend="countTotalSpend($event)">
+      </card-notes>
     </div>
 </div>
 </template>
 
 <script>
+import CardNotes from '../components/CardNotes.vue'
 export default {
   name: 'HomeView',
+  components: {
+    CardNotes
+  }, 
   data() {
     return {
       dataList: [],
@@ -45,48 +32,23 @@ export default {
   methods: {
     getData() {
       this.$store.dispatch('getItemList').then(res => {
-        const resData = this.$store.getters.itemListData
-        this.refactoringData(this.groupingListByDate(resData, 'tanggal'))
+        this.dataList = this.$store.getters.itemListData
       })
     },
+
     numberFormat(data) {
       return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
-    groupingListByDate(xs, key) {
-      return xs.reduce(function(rv, x) {
-        (rv[x[key]] = rv[x[key]] || []).push(x);
-        return rv;
-      }, {});
-    },
-    refactoringData(data) {
-      const tempData = [];
-      for (var key of Object.keys(data)) {
-          tempData.push({
-            tanggal: key,
-            items: data[key],
-            totalExpense: this.countTotalExpense(data[key])
-          })
-      }
-      this.dataList = tempData;
-      this.countTotalSpend()
-    },
-    countTotalExpense(items) {
-      let total = 0;
-      if (items && items.length > 0) {
-        items.forEach(element => {
-          total += element.pengeluaraan
-        });
-      }
-      return total;
-    },
+
     getMonthIdn(month) {
       this.$store.dispatch('convertMonthIdn', month).then(res => {
         return res
       })
     },
-    countTotalSpend() {
-      if (this.dataList && this.dataList.length > 0) {
-        this.dataList.forEach(el => {
+    
+    countTotalSpend(data) {
+      if (data && data.length > 0) {
+        data.forEach(el => {
           this.totalSpend += el.totalExpense
         })
       }
@@ -102,9 +64,6 @@ export default {
 </script>
 
 <style lang="scss">
-.card-note-list .list-content > div {
-
-}
 .card-note-list {
   .list-content {
     font-size: 14px;
@@ -116,14 +75,6 @@ export default {
 .card-footer {
   text-align: right;
   background-color: white;
-}
-
-.table-stripped {
-  color: white;
-}
-
-.table {
-  margin-bottom: 0%;
 }
 
 .card-header {
