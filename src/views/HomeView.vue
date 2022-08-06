@@ -7,53 +7,18 @@
     </div>
 
     <div class="container">
-    <div class="card-note-list row">
-      <div class="col-3 mb-3" v-for="item in 12" >
+    <div class="card-note-list row" v-if="dataList && dataList.length > 0">
+      <div class="col-3 mb-3" v-for="(item, idx) in dataList" :key="idx">
         <b-card
-          header="18 Februari 2022"
+          :header="item.tanggal"
           header-tag="header">
           <div class="list-content">
             <div class="d-flex justify-content-between">
               <div>
-                <span class="me-3">03:15</span>
-                <span>Ayam Tangkap</span>
+                <span class="me-3">{{ item.jam }}</span>
+                <span>{{ item.nama }}</span>
               </div>
-              <p>Rp 32.154</p>
-            </div>
-            <div class="d-flex justify-content-between">
-              <div>
-                <span class="me-3">03:15</span>
-                <span>Ayam Tangkap</span>
-              </div>
-              <p>Rp 32.154</p>
-            </div>
-            <div class="d-flex justify-content-between">
-              <div>
-                <span class="me-3">03:15</span>
-                <span>Ayam Tangkap</span>
-              </div>
-              <p>Rp 32.154</p>
-            </div>
-            <div class="d-flex justify-content-between">
-              <div>
-                <span class="me-3">03:15</span>
-                <span>Ayam Tangkap</span>
-              </div>
-              <p>Rp 32.154</p>
-            </div>
-            <div class="d-flex justify-content-between">
-              <div>
-                <span class="me-3">03:15</span>
-                <span>Ayam Tangkap</span>
-              </div>
-              <p>Rp 32.154</p>
-            </div>
-            <div class="d-flex justify-content-between">
-              <div>
-                <span class="me-3">03:15</span>
-                <span>Ayam Tangkap</span>
-              </div>
-              <p>Rp 32.154</p>
+              <p>Rp {{ numberFormat(item.pengeluaraan)  }}</p>
             </div>
           </div>
           <div class="card-footer">
@@ -72,40 +37,24 @@ export default {
   name: 'HomeView',
   data() {
     return {
-      detail: [
-        {
-            "jam": "03:15",
-            "tanggal":"18 Februari 2021",
-            "nama":"Ayam Tangkap",
-            "pengeluaraan":77249
-        },
-        {
-            "jam": "03:15",
-            "tanggal":"18 Februari 2021",
-            "nama":"Mie Rebus",
-            "pengeluaraan":32154
-        },
-        {
-            "jam": "00:20",
-            "tanggal":"17 Februari 2021",
-            "nama":"Soto Kuning",
-            "pengeluaraan":34992
-        },
-        {
-            "jam": "05:59",
-            "tanggal":"17 Februari 2021",
-            "nama":"Ayam Geprek",
-            "pengeluaraan":37674
-        },
-        {
-            "jam": "05:45",
-            "tanggal":"16 Februari 2021",
-            "nama":"Otak-otak",
-            "pengeluaraan":11971
-        }
-    ]
+      dataList: []
     }
+  },
+  methods: {
+    getData() {
+      this.$store.dispatch('getItemList').then(res => {
+        this.dataList = this.$store.getters.itemListData
+        console.log(this.dataList, 'dian babs')
+      })
+    },
+     numberFormat(data) {
+            return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        },
+  },
+  mounted() {
+    this.getData()
   }
+
 }
  
 </script>
