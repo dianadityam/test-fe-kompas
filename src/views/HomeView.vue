@@ -8,14 +8,14 @@
 
     <div class="container">
     <div class="card-note-list row">
-      <div class="col-3 mb-3" v-for="(item, idx) in detail" :key="idx">
+      <div class="col-3 mb-3" v-for="item in 12" >
         <b-card
           header="18 Februari 2022"
           header-tag="header">
           <div class="list-content">
             <div class="d-flex justify-content-between">
               <div>
-                <span class="me-3">{{ item.jam }}</span>
+                <span class="me-3">03:15</span>
                 <span>Ayam Tangkap</span>
               </div>
               <p>Rp 32.154</p>
