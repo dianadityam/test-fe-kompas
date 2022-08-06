@@ -1,33 +1,33 @@
 <template>
   <div>
     <div class="header mb-4 mt-4">
-      <h1>Diari Jajan Februari 2021</h1>
-      <h5>Pengeluaran Bulan Ini Rp. 5.000.000</h5>
+      <h1>Diari Jajan {{ $store.getters.getCurrentMonth }} {{ $store.getters.getCurrentYear }}</h1>
+      <h5>Pengeluaran Bulan Ini Rp. {{ numberFormat(totalSpend) }}</h5>
       <b-button variant="primary">Tambah Item</b-button>
     </div>
 
     <div class="container">
-    <div class="card-note-list row" v-if="dataList && dataList.length > 0">
-      <div class="col-3 mb-3" v-for="(each, idx) in dataList" :key="idx">
-        <b-card
-          :header="each.tanggal"
-          header-tag="header">
-          <div class="list-content">
-            <div class="d-flex justify-content-between"
-            v-for="(item, j) in each.items" :key="j">
-              <div>
-                <span class="me-3">{{ item.jam }}</span>
-                <span>{{ item.nama }}</span>
+      <div class="card-note-list row" v-if="dataList && dataList.length > 0">
+        <div class="col-3 mb-3" v-for="(each, idx) in dataList" :key="idx">
+          <b-card
+            :header="each.tanggal"
+            header-tag="header">
+            <div class="list-content">
+              <div class="d-flex justify-content-between"
+              v-for="(item, j) in each.items" :key="j">
+                <div>
+                  <span class="me-3">{{ item.jam }}</span>
+                  <span>{{ item.nama }}</span>
+                </div>
+                <p>Rp {{ numberFormat(item.pengeluaraan)  }}</p>
               </div>
-              <p>Rp {{ numberFormat(item.pengeluaraan)  }}</p>
             </div>
-          </div>
-          <div class="card-footer">
-            <strong>Total Rp {{ numberFormat(countTotalExpense(each.items)) }}</strong>
-          </div>
-      </b-card>
+            <div class="card-footer">
+              <strong>Total Rp {{ numberFormat(each.totalExpense) }}</strong>
+            </div>
+        </b-card>
+        </div>
       </div>
-    </div>
 
     </div>
 </div>
@@ -38,7 +38,8 @@ export default {
   name: 'HomeView',
   data() {
     return {
-      dataList: []
+      dataList: [],
+      totalSpend: 0
     }
   },
   methods: {
@@ -62,10 +63,12 @@ export default {
       for (var key of Object.keys(data)) {
           tempData.push({
             tanggal: key,
-            items: data[key]
+            items: data[key],
+            totalExpense: this.countTotalExpense(data[key])
           })
       }
       this.dataList = tempData;
+      this.countTotalSpend()
     },
     countTotalExpense(items) {
       let total = 0;
@@ -75,9 +78,22 @@ export default {
         });
       }
       return total;
+    },
+    getMonthIdn(month) {
+      this.$store.dispatch('convertMonthIdn', month).then(res => {
+        return res
+      })
+    },
+    countTotalSpend() {
+      if (this.dataList && this.dataList.length > 0) {
+        this.dataList.forEach(el => {
+          this.totalSpend += el.totalExpense
+        })
+      }
     }
   },
   mounted() {
+    this.getMonthIdn()
     this.getData()
   }
 
