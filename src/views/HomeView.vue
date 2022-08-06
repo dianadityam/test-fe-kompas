@@ -1,8 +1,23 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div>
+    <h1>
+      Diari Jajan Februari 2021
+    </h1>
+    <h4>
+      Pengeluaran Bulan Ini Rp. 5.000.000
+    </h4>
+    <b-button variant="primary">Tambah Item</b-button>
+    <b-card
+      header="featured"
+      header-tag="header"
+      footer="Card Footer"
+      footer-tag="footer"
+      title="Title"
+    >
+      <b-card-text>Header and footers using props.</b-card-text>
+      <b-button href="#" variant="primary">Go somewhere</b-button>
+    </b-card>
+</div>
 </template>
 
 <script>
@@ -16,3 +31,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+
+</style>
