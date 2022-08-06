@@ -1,18 +1,23 @@
 <template>
   <div>
+    <!-- HEADER SECTION  -->
     <div class="header mb-4 mt-4">
       <h1>Diari Jajan {{ $store.getters.getCurrentMonth }} {{ $store.getters.getCurrentYear }}</h1>
       <h5>Pengeluaran Bulan Ini Rp. {{ numberFormat(totalSpend) }}</h5>
-      <b-button variant="primary">Tambah Item</b-button>
+      <b-button variant="primary" @click="initForm()">Tambah Item</b-button>
     </div>
 
-    <div class="container">
+      <!-- CARD SECTION  -->
       <card-notes 
       v-if="dataList && dataList.length > 0"
       v-bind:dataList="dataList" 
       @totalSpend="countTotalSpend($event)">
       </card-notes>
-    </div>
+
+      <!-- MODAL SECTION  -->
+    <b-modal id="modal-form" title="Tambah Entri" hide-footer centered no-close-on-backdrop>
+      <div><h1>yanzz</h1></div>
+    </b-modal>
 </div>
 </template>
 
@@ -26,7 +31,11 @@ export default {
   data() {
     return {
       dataList: [],
-      totalSpend: 0
+      totalSpend: 0,
+      form: {
+        nama: '',
+        pengeluaraan: ''
+      }
     }
   },
   methods: {
@@ -52,6 +61,12 @@ export default {
           this.totalSpend += el.totalExpense
         })
       }
+    },
+
+    initForm() {
+      this.form.nama = '';
+      this.form.pengeluaraan = '';
+      this.$bvModal.show('modal-form')
     }
   },
   mounted() {
