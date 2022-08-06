@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <strong>Total Rp 350.000</strong>
+            <strong>Total Rp {{ numberFormat(countTotalExpense(each.items)) }}</strong>
           </div>
       </b-card>
       </div>
@@ -66,6 +66,15 @@ export default {
           })
       }
       this.dataList = tempData;
+    },
+    countTotalExpense(items) {
+      let total = 0;
+      if (items && items.length > 0) {
+        items.forEach(element => {
+          total += element.pengeluaraan
+        });
+      }
+      return total;
     }
   },
   mounted() {
