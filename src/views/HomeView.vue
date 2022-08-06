@@ -15,8 +15,33 @@
       </card-notes>
 
       <!-- MODAL SECTION  -->
-    <b-modal id="modal-form" title="Tambah Entri" hide-footer centered no-close-on-backdrop>
-      <div><h1>yanzz</h1></div>
+    <b-modal id="modal-form" size="sm" title="Tambah Entri" hide-header-close hide-footer centered no-close-on-backdrop>
+      <div class="modal-body-content">
+        <div class="mb-2">
+          <b-form-group
+            id="fieldset-1"
+            label="Nama"
+            label-for="input-1"
+          >
+            <b-form-input id="input-1" v-model="form.nama" trim></b-form-input>
+          </b-form-group>
+        </div>
+        <div class="mb-2">
+          <b-form-group
+            id="fieldset-2"
+            label="Harga"
+            label-for="input-2"
+          >
+            <b-form-input id="input-2" v-model="form.pengeluaraan" type="number" trim></b-form-input>
+          </b-form-group>
+        </div>
+        <div class="d-flex justify-content-end">
+          <div class="d-flex">
+            <b-button variant="secondary" @click="$bvModal.hide('modal-form')">BATAL</b-button>
+            <b-button variant="primary ms-2">KIRIM</b-button>
+          </div>
+        </div>
+      </div>
     </b-modal>
 </div>
 </template>
