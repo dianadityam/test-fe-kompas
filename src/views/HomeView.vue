@@ -8,12 +8,13 @@
 
     <div class="container">
     <div class="card-note-list row" v-if="dataList && dataList.length > 0">
-      <div class="col-3 mb-3" v-for="(item, idx) in dataList" :key="idx">
+      <div class="col-3 mb-3" v-for="(each, idx) in dataList" :key="idx">
         <b-card
-          :header="item.tanggal"
+          :header="each.tanggal"
           header-tag="header">
           <div class="list-content">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between"
+            v-for="(item, j) in each.items" :key="j">
               <div>
                 <span class="me-3">{{ item.jam }}</span>
                 <span>{{ item.nama }}</span>
@@ -43,13 +44,29 @@ export default {
   methods: {
     getData() {
       this.$store.dispatch('getItemList').then(res => {
-        this.dataList = this.$store.getters.itemListData
-        console.log(this.dataList, 'dian babs')
+        const resData = this.$store.getters.itemListData
+        this.refactoringData(this.groupingListByDate(resData, 'tanggal'))
       })
     },
-     numberFormat(data) {
-            return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        },
+    numberFormat(data) {
+      return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+    groupingListByDate(xs, key) {
+      return xs.reduce(function(rv, x) {
+        (rv[x[key]] = rv[x[key]] || []).push(x);
+        return rv;
+      }, {});
+    },
+    refactoringData(data) {
+      const tempData = [];
+      for (var key of Object.keys(data)) {
+          tempData.push({
+            tanggal: key,
+            items: data[key]
+          })
+      }
+      this.dataList = tempData;
+    }
   },
   mounted() {
     this.getData()
