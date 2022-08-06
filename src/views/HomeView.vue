@@ -2,7 +2,7 @@
   <div>
     <!-- HEADER SECTION  -->
     <div class="header mb-4 mt-4">
-      <h1>Diari Jajan {{ $store.getters.getCurrentMonth }} {{ $store.getters.getCurrentYear }}</h1>
+      <h1>Diari Jajan {{ $store.getters.convertMonthIdn($store.state.currentDate) }} {{ $store.getters.getCurrentYear }}</h1>
       <h5>Pengeluaran Bulan Ini Rp. {{ numberFormat(totalSpend) }}</h5>
       <b-button variant="primary" @click="initForm()">Tambah Item</b-button>
     </div>
@@ -38,7 +38,7 @@
         <div class="d-flex justify-content-end">
           <div class="d-flex">
             <b-button variant="secondary" @click="$bvModal.hide('modal-form')">BATAL</b-button>
-            <b-button variant="primary ms-2">KIRIM</b-button>
+            <b-button variant="primary ms-2" @click="submitForm()">KIRIM</b-button>
           </div>
         </div>
       </div>
@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     getData() {
+      this.dataList = [];
       this.$store.dispatch('getItemList').then(res => {
         this.dataList = this.$store.getters.itemListData
       })
@@ -73,14 +74,9 @@ export default {
     numberFormat(data) {
       return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
-
-    getMonthIdn(month) {
-      this.$store.dispatch('convertMonthIdn', month).then(res => {
-        return res
-      })
-    },
     
     countTotalSpend(data) {
+      this.totalSpend = 0;
       if (data && data.length > 0) {
         data.forEach(el => {
           this.totalSpend += el.totalExpense
@@ -92,10 +88,29 @@ export default {
       this.form.nama = '';
       this.form.pengeluaraan = '';
       this.$bvModal.show('modal-form')
+    },
+
+    padTo2Digits(num) {
+      return String(num).padStart(2, '0');
+    },
+
+    submitForm() {
+        const payload = {
+            jam: this.$store.state.currentDate.toLocaleTimeString('en-GB', {
+              hour: '2-digit',
+              minute: '2-digit',
+            }),
+            tanggal:`${this.$store.getters.getCurrentDay} ${this.$store.getters.convertMonthIdn(new Date())} ${this.$store.getters.getCurrentYear}`,
+            nama: this.form.nama,
+            pengeluaraan: Number(this.form.pengeluaraan)
+        }
+        this.$store.dispatch('addItems', payload).then(res => {
+          this.$bvModal.hide('modal-form')
+          this.getData();
+        })
     }
   },
   mounted() {
-    this.getMonthIdn()
     this.getData()
   }
 

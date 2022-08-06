@@ -1,40 +1,67 @@
 {
-    "items": [
-        {
-            "jam": "07:15",
-            "tanggal":"5 Agustus 2022",
-            "nama":"Rokok Surya Pro",
-            "pengeluaraan":24000
-        },
-        {
-            "jam": "20:53",
-            "tanggal":"4 Agustus 2022",
-            "nama":"Ayam Tangkap",
-            "pengeluaraan":77249
-        },
-        {
-            "jam": "03:15",
-            "tanggal":"3 Agustus 2022",
-            "nama":"Mie Rebus",
-            "pengeluaraan":32154
-        },
-        {
-            "jam": "00:20",
-            "tanggal":"2 Agustus 2022",
-            "nama":"Soto Kuning",
-            "pengeluaraan":34992
-        },
-        {
-            "jam": "05:59",
-            "tanggal":"2 Agustus 2022",
-            "nama":"Ayam Geprek",
-            "pengeluaraan":37674
-        },
-        {
-            "jam": "05:45",
-            "tanggal":"1 Agustus 2022",
-            "nama":"Otak-otak",
-            "pengeluaraan":11971
-        }
-    ]
+  "items": [
+    {
+      "id": 6,
+      "jam": "07:15",
+      "tanggal": "5 Agustus 2022",
+      "nama": "Rokok Surya Pro",
+      "pengeluaraan": 24000
+    },
+    {
+      "id": 5,
+      "jam": "20:53",
+      "tanggal": "4 Agustus 2022",
+      "nama": "Ayam Tangkap",
+      "pengeluaraan": 77249
+    },
+    {
+      "id": 4,
+      "jam": "03:15",
+      "tanggal": "3 Agustus 2022",
+      "nama": "Mie Rebus",
+      "pengeluaraan": 32154
+    },
+    {
+      "id": 3,
+      "jam": "00:20",
+      "tanggal": "2 Agustus 2022",
+      "nama": "Soto Kuning",
+      "pengeluaraan": 34992
+    },
+    {
+      "id": 2,
+      "jam": "05:59",
+      "tanggal": "2 Agustus 2022",
+      "nama": "Ayam Geprek",
+      "pengeluaraan": 37674
+    },
+    {
+      "id": 1,
+      "jam": "05:45",
+      "tanggal": "1 Agustus 2022",
+      "nama": "Otak-otak",
+      "pengeluaraan": 11971
+    },
+    {
+      "jam": "05:28",
+      "tanggal": "7 Agustus 2022",
+      "nama": "Comro",
+      "pengeluaraan": 12000,
+      "id": 7
+    },
+    {
+      "jam": "05:31",
+      "tanggal": "7 Agustus 2022",
+      "nama": "Teh manis",
+      "pengeluaraan": 4000,
+      "id": 8
+    },
+    {
+      "jam": "05:32",
+      "tanggal": "7 Agustus 2022",
+      "nama": "Kucing",
+      "pengeluaraan": 200000,
+      "id": 9
+    }
+  ]
 }

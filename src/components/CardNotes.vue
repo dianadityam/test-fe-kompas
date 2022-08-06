@@ -43,14 +43,18 @@ export default {
     },
 
     refactoringData(data) {
-      const tempData = [];
+      let tempData = [];
       for (var key of Object.keys(data)) {
           tempData.push({
             tanggal: key,
+            monthNumber: key.split(" ", 1),
             items: data[key],
             totalExpense: this.countTotalExpenseByMonth(data[key])
           })
       }
+      tempData.sort(function(a,b){
+        return b.tanggal.split(" ", 1) - a.tanggal.split(" ", 1);
+      });
       this.itemList = tempData;
       this.$emit("totalSpend", tempData);
     },
