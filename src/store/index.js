@@ -59,7 +59,7 @@ export default new Vuex.Store({
       state.currentMonth = val
     }
   },
-  actions: {
+  actions: {  
     //get items data
     getItemList(context, paramsQ) {
       config = {

@@ -2,9 +2,9 @@
   <div>
     <!-- HEADER SECTION  -->
     <div class="header mb-4 mt-4">
-      <h1>Diari Jajan {{ $store.getters.convertMonthIdn($store.state.currentDate) }} {{ $store.getters.getCurrentYear }}</h1>
+      <h2>Diari Jajan {{ $store.getters.convertMonthIdn($store.state.currentDate) }} {{ $store.getters.getCurrentYear }}</h2>
       <h5>Pengeluaran Bulan Ini Rp. {{ numberFormat(totalSpend) }}</h5>
-      <b-button variant="primary" @click="initForm()">Tambah Item</b-button>
+      <b-button variant="primary mt-2" @click="initForm()">Tambah Item</b-button>
     </div>
 
       <!-- CARD SECTION  -->
@@ -35,7 +35,7 @@
             <b-form-input id="input-2" v-model="form.pengeluaraan" type="number" trim></b-form-input>
           </b-form-group>
         </div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mt-3">
           <div class="d-flex">
             <b-button variant="secondary" @click="$bvModal.hide('modal-form')">BATAL</b-button>
             <b-button variant="primary ms-2" @click="submitForm()">KIRIM</b-button>
@@ -119,6 +119,14 @@ export default {
 </script>
 
 <style lang="scss">
+.btn {
+  border-radius: 0 !important;
+}
+.btn.btn-primary {
+  background: #17179b !important;
+  border-color: #17179b !important;
+  text-transform: uppercase;
+}
 .card-note-list {
   .list-content {
     font-size: 14px;
