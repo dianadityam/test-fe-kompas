@@ -11,44 +11,53 @@
     
     </div>
     <div class="card-note-list">
-    <b-card
-      header="18 Februari 2022"
-      header-tag="header"
-    ><div>
-    <table class="table">
-  <tbody>
-    <tr>
-      <td>03:15</td>
-      <td>Ayam Tangkap</td>
-      <td>Rp 77.249</td>
-    </tr>
-    <tr>
-      <td>04:52</td>
-      <td>Mie Rebus</td>
-      <td>Rp 32.154</td>
-    </tr>
-    <tr>
-      <td>06:46</td>
-      <td>Klontong</td>
-      <td>Rp 91.903</td>
-    </tr>
-    <tr>
-      <td>08:08</td>
-      <td>Urap</td>
-      <td>Rp 19.431</td>
-    </tr>
-    <tr>
-      <td>12:48</td>
-      <td>Kwetiau Rebus</td>
-      <td>Rp 53.890</td>
-    </tr>
-    <tr>
-      <td>19:09</td>
-      <td>Onde-Onde</td>
-      <td>Rp 42.120</td>
-    </tr>
-  </tbody>
-</table>
+      <b-card
+        header="18 Februari 2022"
+        header-tag="header"
+      >
+      <div class="list-content">
+        <div class="d-flex justify-content-between">
+          <div>
+            <span class="me-4">03:15</span>
+            <span>Ayam Tangkap</span>
+          </div>
+          <p>Rp 32.154</p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <span class="me-4">03:15</span>
+            <span>Ayam Tangkap</span>
+          </div>
+          <p>Rp 32.154</p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <span class="me-4">03:15</span>
+            <span>Ayam Tangkap</span>
+          </div>
+          <p>Rp 32.154</p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <span class="me-4">03:15</span>
+            <span>Ayam Tangkap</span>
+          </div>
+          <p>Rp 32.154</p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <span class="me-4">03:15</span>
+            <span>Ayam Tangkap</span>
+          </div>
+          <p>Rp 32.154</p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <span class="me-4">03:15</span>
+            <span>Ayam Tangkap</span>
+          </div>
+          <p>Rp 32.154</p>
+        </div>
 
   </div>
     <div class="card-footer">
@@ -67,6 +76,11 @@
 
 .card-note-list {
   margin : 1rem;
+  .list-content {
+    > div {
+      border-bottom: 1px solid lightgray;
+    }
+  }
 
 .card-footer {
   text-align: right;
